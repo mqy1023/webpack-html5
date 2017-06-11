@@ -11,5 +11,5 @@ body {
   align-items: center;
   background: #f0f0f0;
   font-size: 2rem;
-  text-align: center;
+  justify-content: center;
 }
