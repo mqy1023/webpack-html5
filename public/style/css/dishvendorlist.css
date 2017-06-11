@@ -1,0 +1,91 @@
+.detailbox{
+	margin-bottom: 62px;
+}
+.contentbox{
+	background: #fff;
+}
+
+.imgbox {
+	position: relative;
+}
+.headerbox {
+	height: 44px;
+	position: absolute;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	z-index: 2;
+}
+
+.imgbox .bgarea{
+    color: #fff;
+    font-size: 22px;
+    letter-spacing: 0;
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.imgbox .bgarea .title{
+	margin: 74px 20px 0px;
+	display: flex;
+}
+
+.imgbox .bgarea .title div{
+	margin:0px auto;
+	line-height: 46px;
+	padding: 0px 20px;
+	box-sizing: border-box;
+	display: inline-block;
+	background: #000;
+}
+
+.headerbox .back{
+	padding: 12px 15px;
+	background: #cbdae4;
+}
+
+.headerbox .more{
+	padding: 12px 15px;
+	background: #7f8284;
+}
+
+.maximg{
+	height: 154px;
+	width: 100%;
+	background: #0094ff;
+    border: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
