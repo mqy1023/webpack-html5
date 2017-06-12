@@ -1,5 +1,5 @@
-import Styles from '../style/css/dishsku.css';
-import Styles from '../style/css/base.less';
+import detail from '../style/css/detail.css';
+import base from '../style/css/base.less';
 //require('../style/css/dishsku.css');
 const pagename = "菜品详情页!";
 const dateTime = Date.now();

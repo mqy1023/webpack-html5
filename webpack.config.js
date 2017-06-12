@@ -7,8 +7,8 @@ const webpack = require('webpack');
 module.exports = {
 	entry:{
 		indexpage:['./public/js/index.js']
-		,dishskupage:['./public/js/dishsku.js']
-		,dishvendorlistpage:['./public/js/dishvendorlist.js']
+		,detailpage:['./public/js/detail.js']
+		,listpage:['./public/js/list.js']
 		//,common:['open']
 	},
 	output:{
@@ -69,22 +69,22 @@ module.exports = {
 				}
 			}),
 		new HtmlWebpackPlugin({
-				template:'./public/tpl/dishsku.html'
-				,filename:'dishsku.html'//可以使用hash命名
+				template:'./public/tpl/detail.html'
+				,filename:'detail.html'//可以使用hash命名
 				,title:'大众点评 推荐菜详情'
 				,inject:'body'//脚本包含到body 也可以写到head里面
-				,chunks:['dishskupage']//指定当前模板需要打入哪些js模块
+				,chunks:['detailpage']//指定当前模板需要打入哪些js模块
 				,minify:{//启用代码代码压缩
 					removeComments:true,//移除注释
 					collapseWhitespace:true//移除空格
 				}
 			}),
 		new HtmlWebpackPlugin({
-				template:'./public/tpl/dishvendorlist.html'
-				,filename:'dishvendorlist.html'//可以使用hash命名
+				template:'./public/tpl/list.html'
+				,filename:'list.html'//可以使用hash命名
 				,title:'大众点评 推荐菜商户列表'
 				,inject:'body'//脚本包含到body 也可以写到head里面
-				,chunks:['dishvendorlist']//指定当前模板需要打入哪些js模块
+				,chunks:['listpage']//指定当前模板需要打入哪些js模块
 				,minify:{//启用代码代码压缩
 					removeComments:true,//移除注释
 					collapseWhitespace:true//移除空格
