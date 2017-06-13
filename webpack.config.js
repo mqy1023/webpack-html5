@@ -18,7 +18,8 @@ module.exports = {
 		//,publishPath:'http://cdn.com' //配置文件公共路径，上线的时候直接替换为线上域名
 	},
 	module:{
-		rules:[{
+		rules:[
+			{
 				test:'/\.js$/',
 				exclude: [path.resolve(__dirname, '..', 'node_modules')],
 				use: ['babel-loader']
