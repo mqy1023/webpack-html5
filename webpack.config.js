@@ -3,6 +3,7 @@ const CleanPlugin = require('clean-webpack-plugin');//webpack插件，用于清�
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
+const packageFilePath = path.join(__dirname, "dist");
 
 module.exports = {
 	entry:{
@@ -12,7 +13,7 @@ module.exports = {
 		//,common:['open']
 	},
 	output:{
-		path: __dirname + '/dist'
+		path: packageFilePath
 		//,filename:'js/[name]-[chunkhash].js'//dev 环境不能使用这个配置，因为您不应该使用纯或散列进行开发。这将导致许多其他问题，比如内存泄漏，因为dev服务器不知道什么时候清理旧文件。
 		,filename:'js/[name].js'
 		//,publishPath:'http://cdn.com' //配置文件公共路径，上线的时候直接替换为线上域名
@@ -90,12 +91,10 @@ module.exports = {
 					removeComments:true,//移除注释
 					collapseWhitespace:true//移除空格
 				}
-			}),
-		//new ExtractTextPlugin("name].css")
-		new ExtractTextPlugin({ filename: '[name].css', disable: false, allChunks: true })
+			})
 	],
 	devServer: {
-		contentBase: path.join(__dirname, "dist"),
+		contentBase: packageFilePath,
 		watchContentBase:true,//告诉服务器监视那些通过 devServer.contentBase 选项提供的文件。文件改动将触发整个页面重新加载。默认被禁用。
 		compress: true,//一切服务都启用gzip 压缩：
 		inline: true,//应用程序启用内联模式,默认内联模式
