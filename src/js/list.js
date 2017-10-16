@@ -1,3 +1,24 @@
 import list from '../style/css/list.less';
+import print from '../lib/printMsg.js';
+print.log('列表页');
 
-console.log('菜品商户列表页！');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
