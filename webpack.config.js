@@ -5,6 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 const packageFilePath = path.join(__dirname, "dist");
 const glob = require('glob');
+const autoprefixer = require('autoprefixer');
 
 // 获取客户端entry
 let entries = {};
@@ -31,11 +32,11 @@ let config = {
 			},
 			{ 	
 				test: /\.css$/, 
-				use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: [ 'css-loader' ] }) 
+				use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: [ 'css-loader','postcss-loader' ] }) 
 			},
 			{
                 test: /\.less$/,
-                use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader','less-loader']}) // 用!去链式调用loader
+                use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader','postcss-loader','less-loader']}) // 用!去链式调用loader
 	        },
 	        {
                 test: /\.(png|jpg|jpeg|gif)$/,
@@ -63,6 +64,18 @@ let config = {
 	          filename: "common.js",
 	          minChunks: Infinity//当项目中引用次数超过2次的包自动打入commons.js中,可自行根据需要进行调整优化
 		    }),
+		new webpack.LoaderOptionsPlugin({
+			options: {
+		        postcss: [
+		          autoprefixer({
+		            browsers: [
+		              '>1%'
+		            ]
+		          })
+		        ]
+		    }
+		})
+		,new ExtractTextPlugin({ filename: 'css/[name].css', disable: false, allChunks: true })
 	],
 	devServer: {
 		contentBase: packageFilePath,
