@@ -1,0 +1,12 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>首页</title><script type="text/javascript">(function(doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'onorientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function() {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 10 * (clientWidth / 320) + 'px';
+                };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);</script><link href="css/index.css" rel="stylesheet"></head><body><header class="header">标题</header><ul class="linkarea"><li class="link-li"><a href="/list.html">列表页</a></li><li class="link-li"><a href="/detail.html">详情页</a></li></ul><script type="text/javascript" src="common.js"></script><script type="text/javascript" src="js/index.js"></script></body></html>
