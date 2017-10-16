@@ -9,61 +9,20 @@
     <meta name="description" content=""/>
     <meta name="format-detection" content="telephone=no">
     <meta name="format-detection" content="email=no"/>
-
-    <style type="text/css">
-        *{
-            padding: 0px;
-            margin: 0px;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body{
-        	width:100%;
-        	font-family:Helvetica,"宋体",sans-serif;
-        	font-size:12px;
-        	-webkit-touch-callout:none;
-        	-webkit-user-select:none;
-        	background-color:#f0f0f0;
-        	word-break:break-all;
-        	-webkit-text-size-adjust:100%
-        }
-        
-		a{
-			color:#878787;
-			text-decoration:none;
-			-webkit-tap-highlight-color:rgba(0,0,0,0);
-		}
-		a:hover{
-			text-decoration:none
-		}
-		button,input,select,textarea{
-			font-size:100%;
-			margin:0;
-			padding:0;
-			outline:0
-		}
-		dd,dt{
-			display:inline-block
-		}
-		input,textarea{
-			resize:none;
-			-webkit-appearance:none;
-			outline:0;
-		}
-		textarea{
-			resize:none;
-			-webkit-appearance:none;
-		}
-		ol,ul{
-			list-style:none;
-		}
-		em{
-			font-style:normal;
-		}
-		b,h1,h2,h3,h4,h5,h6,strong{
-			font-weight:400;
-		}
-	</style>
+    <script type="text/javascript">
+        (function(doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'onorientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function() {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 10 * (clientWidth / 320) + 'px';
+                };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
 </head>
 <body>
 <div class="detailbox">

@@ -4,14 +4,18 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 const packageFilePath = path.join(__dirname, "dist");
+const glob = require('glob');
 
-module.exports = {
-	entry:{
-		indexpage:['./public/js/index.js']
-		,detailpage:['./public/js/detail.js']
-		,listpage:['./public/js/list.js']
-		//,common:['open']
-	},
+// 获取客户端entry
+let entries = {};
+glob.sync(`./src/js/*.js`).map(file => {
+    entries[path.basename(file, '.js')] = [file];
+});
+
+console.log(entries);
+
+let config = {
+	entry:entries,
 	output:{
 		path: packageFilePath
 		//,filename:'js/[name]-[chunkhash].js'//dev 环境不能使用这个配置，因为您不应该使用纯或散列进行开发。这将导致许多其他问题，比如内存泄漏，因为dev服务器不知道什么时候清理旧文件。
@@ -54,44 +58,11 @@ module.exports = {
 	},
 	plugins:[
 		new CleanPlugin(['dist', 'build']),//每次打包清理上次的打包文件
-		// new webpack.optimize.CommonsChunkPlugin({
-		//           name: "common",
-		//           filename: "common.js",
-		//           minChunks: Infinity//当项目中引用次数超过2次的包自动打入commons.js中,可自行根据需要进行调整优化
-		//       }),
-		new HtmlWebpackPlugin({
-				template:'./public/tpl/index.html'
-				,filename:'index.html'//可以使用hash命名
-				,title:'大众点评 推荐菜详情'
-				,inject:'body'//脚本包含到body 也可以写到head里面
-				,chunks:['indexpage']//指定当前模板需要打入哪些js模块
-				,minify:{//启用代码代码压缩
-					removeComments:true,//移除注释
-					collapseWhitespace:true//移除空格
-				}
-			}),
-		new HtmlWebpackPlugin({
-				template:'./public/tpl/detail.html'
-				,filename:'detail.html'//可以使用hash命名
-				,title:'大众点评 推荐菜详情'
-				,inject:'body'//脚本包含到body 也可以写到head里面
-				,chunks:['detailpage']//指定当前模板需要打入哪些js模块
-				,minify:{//启用代码代码压缩
-					removeComments:true,//移除注释
-					collapseWhitespace:true//移除空格
-				}
-			}),
-		new HtmlWebpackPlugin({
-				template:'./public/tpl/list.html'
-				,filename:'list.html'//可以使用hash命名
-				,title:'大众点评 推荐菜商户列表'
-				,inject:'body'//脚本包含到body 也可以写到head里面
-				,chunks:['listpage']//指定当前模板需要打入哪些js模块
-				,minify:{//启用代码代码压缩
-					removeComments:true,//移除注释
-					collapseWhitespace:true//移除空格
-				}
-			})
+		new webpack.optimize.CommonsChunkPlugin({
+	          name: "common",
+	          filename: "common.js",
+	          minChunks: Infinity//当项目中引用次数超过2次的包自动打入commons.js中,可自行根据需要进行调整优化
+		    }),
 	],
 	devServer: {
 		contentBase: packageFilePath,
@@ -105,20 +76,34 @@ module.exports = {
 	}
 }
 
+const htmlArray = ['index','list','detail'];
+htmlArray.forEach((page) => {
+  const chunksArray = [page];
+  //if (page === 'index') {
+    chunksArray.push('common');
+  //}
+  const newPlugin = new HtmlWebpackPlugin(
+	{
+		template:'./src/tpl/'+ page +'.html'
+		,filename: page + '.html'//可以使用hash命名
+		,title:'大众点评'
+		,inject:'body'//脚本包含到body 也可以写到head里面
+		,chunks:chunksArray//指定当前模板需要打入哪些js模块
+		,minify:{//启用代码代码压缩
+			removeComments:true,//移除注释
+			collapseWhitespace:true//移除空格
+		}
+	}
+  );
+  config.plugins.push(newPlugin);
+});
 
-
-
-
-
-
-
+module.exports = config;
 
 //img处理
 //url-loader 可以根据自定义文件大小或者转化为 base64 格式的 dataUrl, 或者单独作为文件, 也可以自定义对应的hash 文件名
 //file-loader 默认情况下会根据图片生成对应的 MD5hash 的文件格式
 //image-webpack-loader 提供压缩图片的功能
-
-
 
 
 
